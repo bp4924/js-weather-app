@@ -1,3 +1,3 @@
 # js-weather-app
 
-following demo from webdevcimplified (https://www.youtube.com/watch?v=w0VEOghdMpQ)
+following demo from WebDevSimplified (https://www.youtube.com/watch?v=w0VEOghdMpQ)
