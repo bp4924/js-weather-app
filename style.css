@@ -1,10 +1,81 @@
 :root {
-  --icon-color: rgba(0, 0, 255, 0.5);
-  --icon-text-color: rgba(168, 168, 168, 0.5);
-  --table-row-color-even: rgba(192, 192, 192, 0.5);
-  --table-row-color-odd: rgba(192, 192, 192, 0.7);
+  --back-color: hsl(55, 30%, 50%);
+  /*  --icon-color: rgba(1, 79, 168, 0.8);
+*/
+  --icon-color: red;
+
+  --icon-text-color: hsl(72, 55%, 15%);
+
+  --table-row-color-even: rgba(1, 168, 168, 0.4);
+  --table-row-color-odd: rgba(1, 168, 168, 0.7);
 }
 
 body {
-  background: var(--icon-text-color);
+  margin: 0;
+  background-color: var(--back-color);
+  color: var(--icon-text-color);
+  font-family: sans-serif;
+  font-weight: bolder;
+}
+
+.blurred {
+  filter: blur(2px);
+  overflow: hidden;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+}
+
+.header-left {
+  display: flex;
+  width: 50%;
+  align-items: center;
+  justify-content: center;
+  margin: 0.5rem;
+  padding: 0.5rem;
+  border-right: 2px solid var(--icon-text-color);
+}
+
+.header-right {
+  display: grid;
+  width: 50%;
+  justify-content: space-around;
+  gap: 0.5rem;
+  grid-template-columns: repeat(3, auto);
+  grid-template-rows: repeat(2, auto);
+}
+
+.weather-icon {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  color: var(--icon-color);
+}
+
+.weather-icon.large {
+  width: 80px;
+  height: 80px;
+}
+
+.header-current-temp {
+  font-size: 2rem;
+  margin-left: 1rem;
+}
+
+.info-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.label {
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  font-weight: bolder;
+}
+
+.value-sub-info {
+  font-size: 0.75rem;
 }
