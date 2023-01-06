@@ -6,8 +6,8 @@
 
   --icon-text-color: hsl(72, 55%, 15%);
 
-  --table-row-color-even: rgba(1, 168, 168, 0.4);
-  --table-row-color-odd: rgba(1, 168, 168, 0.7);
+  --table-row-color-even: hsl(55, 30%, 45%);
+  --table-row-color-odd: hsl(55, 30%, 55%);
 }
 
 body {
@@ -101,4 +101,23 @@ body {
   font-size: 0.75rem;
   color: var(--icon-text-color);
   margin-top: 0.5rem;
+}
+
+.hour-section {
+  width: 100%;
+  text-align: center;
+  border-spacing: 0;
+  border: 0.1rem solid red;
+}
+
+.hour-row {
+  background-color: var(--table-row-color-odd);
+}
+
+.hour-row:nth-child(2n) {
+  background-color: var(--table-row-color-even);
+}
+
+.hour-row > td {
+  padding: 0.25rem 0.5rem;
 }
