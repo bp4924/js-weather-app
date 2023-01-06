@@ -107,7 +107,7 @@ body {
   width: 100%;
   text-align: center;
   border-spacing: 0;
-  border: 0.1rem solid red;
+  border: 1px dotted var(--icon-text-color);
 }
 
 .hour-row {
