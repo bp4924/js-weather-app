@@ -1,97 +1,123 @@
 :root {
-  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
-  font-size: 16px;
-  line-height: 24px;
-  font-weight: 400;
+  --back-color: hsl(55, 30%, 50%);
+  /*  --icon-color: rgba(1, 79, 168, 0.8);
+*/
+  --icon-color: red;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  --icon-text-color: hsl(72, 55%, 15%);
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+  --table-row-color-even: hsl(55, 30%, 45%);
+  --table-row-color-odd: hsl(55, 30%, 55%);
 }
 
 body {
   margin: 0;
+  background-color: var(--back-color);
+  color: var(--icon-text-color);
+  font-family: sans-serif;
+  font-weight: bolder;
+}
+
+.blurred {
+  filter: blur(2px);
+  overflow: hidden;
+}
+
+.header {
   display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  align-items: center;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+.header-left {
+  display: flex;
+  width: 50%;
+  align-items: center;
+  justify-content: center;
+  margin: 0.5rem;
+  padding: 0.5rem;
+  border-right: 2px solid var(--icon-text-color);
 }
 
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+.header-right {
+  display: grid;
+  width: 50%;
+  justify-content: space-around;
+  gap: 0.5rem;
+  grid-template-columns: repeat(3, auto);
+  grid-template-rows: repeat(2, auto);
+}
+
+.weather-icon {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  color: var(--icon-color);
+}
+
+.weather-icon.large {
+  width: 80px;
+  height: 80px;
+}
+
+.header-current-temp {
+  font-size: 2rem;
+  margin-left: 1rem;
+}
+
+.info-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.label {
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  font-weight: bolder;
+}
+
+.value-sub-info {
+  font-size: 0.75rem;
+}
+
+.day-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 75px);
+  gap: 0.5rem;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.day-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid var(--icon-text-color);
+  border-radius: 0.25rem;
+  padding: 0.25rem;
+}
+
+.day-card-day {
+  font-size: 0.75rem;
+  color: var(--icon-text-color);
+  margin-top: 0.5rem;
+}
+
+.hour-section {
+  width: 100%;
   text-align: center;
+  border-spacing: 0;
+  border: 0.1rem solid red;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vanilla:hover {
-  filter: drop-shadow(0 0 2em #f7df1eaa);
+.hour-row {
+  background-color: var(--table-row-color-odd);
 }
 
-.card {
-  padding: 2em;
+.hour-row:nth-child(2n) {
+  background-color: var(--table-row-color-even);
 }
 
-.read-the-docs {
-  color: #888;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+.hour-row > td {
+  padding: 0.25rem 0.5rem;
 }
