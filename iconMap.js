@@ -1,8 +1,8 @@
 export const ICON_MAP = new Map();
 
 addMapping([0, 1], "sun");
-addMapping([2], "cloud-sun");
-addMapping([3, 45, 48], "cloud");
+addMapping([2, 3], "cloud-sun");
+addMapping([45, 48], "cloud");
 
 addMapping([51, 61], "cloud-rain");
 addMapping([53, 55, 63, 65, 80, 81], "cloud-showers-heavy");

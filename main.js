@@ -2,18 +2,31 @@ import "./style.css";
 import { getWeather } from "./weather";
 import { ICON_MAP } from "./iconMap";
 
-getWeather(34, -84, Intl.DateTimeFormat().resolvedOptions().timeZone)
-  .then(renderWeather)
-  .catch((e) => {
-    console.error(e);
-    alert("Error getting weather data");
-  });
+navigator.geolocation.getCurrentPosition(positionSuccess, positionError);
 
-function renderWeather({ current, daily, hourly }) {
+function positionSuccess({ coords }) {
+  getWeather(
+    coords.latitude,
+    coords.longitude,
+    Intl.DateTimeFormat().resolvedOptions().timeZone
+  )
+    .then(renderWeather)
+    .catch((e) => {
+      console.error(e);
+      alert("Error getting weather data");
+    });
+}
+
+function positionError() {
+  alert("Error getting location");
+}
+
+function renderWeather({ current, daily, hourly, sunrise, sunset }) {
   renderCurrentWeather(current);
   renderDailyWeather(daily);
-  /*renderHourlyWeather(hourly);
-   */
+  renderHourlyWeather(hourly);
+  //renderNightTime(sunrise, sunset)
+
   document.body.classList.remove("blurred");
 }
 
@@ -52,4 +65,28 @@ function renderDailyWeather(daily) {
     dailySection.append(element);
   });
 }
-//  renderHourlyWeather(hourly);
+
+const HOUR_FORMATTER = new Intl.DateTimeFormat(undefined, { hour: "numeric" });
+const hourlySection = document.querySelector("[data-hour-section] ");
+const hourRowTemplate = document.getElementById("hour-row-template");
+
+function renderHourlyWeather(hourly) {
+  hourlySection.innerHTML = "";
+  hourly.forEach((hour) => {
+    const element = hourRowTemplate.content.cloneNode(true);
+    setValue("temp", hour.temp, { parent: element });
+    setValue("fl-temp", hour.feelsLike, { parent: element });
+    setValue("wind", hour.windSpeed, { parent: element });
+    setValue("precip", hour.precip, { parent: element });
+    setValue("day", DAY_FORMATTER.format(hour.timestamp), { parent: element });
+
+    setValue("time", HOUR_FORMATTER.format(hour.timestamp), {
+      parent: element,
+    });
+
+    // FD - change icon code to moon after sunset
+
+    element.querySelector("[data-icon]").src = getIconUrl(hour.iconCode);
+    hourlySection.append(element);
+  });
+}

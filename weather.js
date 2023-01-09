@@ -50,7 +50,11 @@ function parseCurrentWeather({ current_weather, daily }) {
 }
 
 function parseDailyWeather({ daily }) {
-  return daily.time.map((time, index) => {
+  console.log(daily.sunrise, daily.sunset);
+  /*   if (timestamp > daily.sunrise && timestamp < daily.sunset) {
+    let dayTime = true;
+  }
+ */ return daily.time.map((time, index) => {
     return {
       timestamp: time * 1000,
       iconCode: daily.weathercode[index],
