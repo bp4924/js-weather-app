@@ -3,10 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Weather App</title>
+    <title>JS Weather App</title>
   </head>
-  <body>
-    <!--     <body class="blurred"> -->
+  <body class="blurred">
     <header class="header">
       <div class="header-left">
         <img
@@ -308,10 +307,13 @@
     </table>
 
     <template id="day-card-template">
-      <img data-icon class="weather-icon" />
-      <div class="day-card-day" data-date></div>
-      <div><span data-temp></span><span>&deg;</span></div>
+      <div class="day-card">
+        <img data-icon class="weather-icon" />
+        <div class="day-card-day" data-date></div>
+        <div><span data-temp></span><span>&deg;</span></div>
+      </div>
     </template>
+
     <template id="hour-row-template">
       <tr class="hour-row">
         <td>
