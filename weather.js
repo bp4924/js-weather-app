@@ -29,23 +29,29 @@ function parseCurrentWeather({ current_weather, daily }) {
     windspeed: windSpeed,
     weathercode: iconCode,
   } = current_weather;
-
+  console.log(current_weather);
   const {
     temperature_2m_max: [highTemp],
     temperature_2m_min: [lowTemp],
     precipitation_sum: [precip],
     apparent_temperature_max: [highFeelsLike],
     apparent_temperature_min: [lowFeelsLike],
+    sunrise: [sunrise],
+    sunset: [sunset],
   } = daily;
+  console.log(precip);
+
   return {
     currentTemp: Math.round(currentTemp),
     iconCode,
     highTemp: Math.round(highTemp),
     lowTemp: Math.round(lowTemp),
-    precip: Math.round((precip * 100) / 100),
+    precip: Math.round(precip * 100) / 100,
     highFeelsLike: Math.round(highFeelsLike),
     lowFeelsLike: Math.round(lowFeelsLike),
     windSpeed: Math.round(windSpeed),
+    sunrise,
+    sunset,
   };
 }
 
@@ -59,6 +65,8 @@ function parseDailyWeather({ daily }) {
       timestamp: time * 1000,
       iconCode: daily.weathercode[index],
       maxTemp: Math.round(daily.temperature_2m_max[index]),
+      sunrise: daily.sunrise[index],
+      sunset: daily.sunset[index],
     };
   });
 }
@@ -72,7 +80,7 @@ function parseHourlyWeather({ hourly, current_weather }) {
         temp: Math.round(hourly.temperature_2m[index]),
         feelsLike: Math.round(hourly.apparent_temperature[index]),
         windSpeed: Math.round(hourly.windspeed_10m[index]),
-        precip: Math.round((hourly.precipitation[index] * 100) / 100),
+        precip: Math.round(hourly.precipitation[index] * 100) / 100,
       };
     })
     .filter(({ timestamp }) => timestamp >= current_weather.time * 1000);

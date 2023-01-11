@@ -21,7 +21,7 @@ function positionError() {
   alert("Error getting location");
 }
 
-function renderWeather({ current, daily, hourly, sunrise, sunset }) {
+function renderWeather({ current, daily, hourly }) {
   renderCurrentWeather(current);
   renderDailyWeather(daily);
   renderHourlyWeather(hourly);
@@ -50,6 +50,8 @@ function renderCurrentWeather(current) {
   setValue("current-fl-high", current.highFeelsLike);
   setValue("current-fl-low", current.lowFeelsLike);
   setValue("current-wind", current.windSpeed);
+  setValue("current-sunrise", current.sunrise);
+  setValue("current-sunset", current.sunset);
 }
 
 const DAY_FORMATTER = new Intl.DateTimeFormat(undefined, { weekday: "long" });
@@ -72,7 +74,8 @@ const hourRowTemplate = document.getElementById("hour-row-template");
 
 function renderHourlyWeather(hourly) {
   hourlySection.innerHTML = "";
-  hourly.forEach((hour) => {
+  // create 24 hourly sections
+  hourly.slice(0, 24).forEach((hour) => {
     const element = hourRowTemplate.content.cloneNode(true);
     setValue("temp", hour.temp, { parent: element });
     setValue("fl-temp", hour.feelsLike, { parent: element });
