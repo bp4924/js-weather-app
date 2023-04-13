@@ -19,6 +19,7 @@ export function getWeather(lat, lon, timezone) {
         current: parseCurrentWeather(data),
         daily: parseDailyWeather(data),
         hourly: parseHourlyWeather(data),
+        dayTime: parseSunrise(data),
       };
     });
 }
@@ -39,7 +40,6 @@ function parseCurrentWeather({ current_weather, daily }) {
     sunrise: [sunrise],
     sunset: [sunset],
   } = daily;
-  console.log(precip);
 
   return {
     currentTemp: Math.round(currentTemp),
@@ -56,17 +56,13 @@ function parseCurrentWeather({ current_weather, daily }) {
 }
 
 function parseDailyWeather({ daily }) {
-  console.log(daily.sunrise, daily.sunset);
-  /*   if (timestamp > daily.sunrise && timestamp < daily.sunset) {
-    let dayTime = true;
-  }
- */ return daily.time.map((time, index) => {
+  return daily.time.map((time, index) => {
     return {
       timestamp: time * 1000,
       iconCode: daily.weathercode[index],
       maxTemp: Math.round(daily.temperature_2m_max[index]),
       sunrise: daily.sunrise[index],
-      sunset: daily.sunset[index],
+      //      sunset: daily.sunset[index],
     };
   });
 }
@@ -84,4 +80,14 @@ function parseHourlyWeather({ hourly, current_weather }) {
       };
     })
     .filter(({ timestamp }) => timestamp >= current_weather.time * 1000);
+}
+
+function parseSunrise({ sunrise, time }) {
+  let dayTime = false;
+  if (time > sunrise) {
+    dayTime = true;
+  }
+
+  console.log(dayTime);
+  return dayTime;
 }
