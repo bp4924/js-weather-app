@@ -30,7 +30,6 @@ function parseCurrentWeather({ current_weather, daily }) {
     windspeed: windSpeed,
     weathercode: iconCode,
   } = current_weather;
-  console.log(current_weather);
   const {
     temperature_2m_max: [highTemp],
     temperature_2m_min: [lowTemp],
@@ -40,6 +39,7 @@ function parseCurrentWeather({ current_weather, daily }) {
     sunrise: [sunrise],
     sunset: [sunset],
   } = daily;
+  console.log("current weather: ", current_weather);
 
   return {
     currentTemp: Math.round(currentTemp),
